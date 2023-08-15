@@ -1,4 +1,6 @@
 import os
+import requests
+
 from dotenv import load_dotenv
 from typing import Any
 from geopy.geocoders import Nominatim
@@ -14,10 +16,22 @@ def get_location(city_name: str) -> Any:
     
 
 def get_lat(location):
-    """Get the location and return the latitude."""
+    """Take the location and return the latitude."""
     return f"{location.latitude: .2f}"
 
 
 def get_lon(location):
-    """Get the location and return the longitude."""
+    """Take the location and return the longitude."""
     return f"{location.longitude: .2f}"
+
+
+def get_city_data_today(city_name):
+    """Take city name and return weather data in json format"""
+    location = get_location(city_name)
+    lat = get_lat(location)
+    lon = get_lon(location)
+
+    weather_data = requests.get(
+        f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&units=metric&lon={lon}&appid={API_KEY}&lang=ru"
+    )
+    return weather_data.json()
