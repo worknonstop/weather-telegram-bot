@@ -25,7 +25,7 @@ def get_lon(location):
     return f"{location.longitude: .2f}"
 
 
-def get_city_data_today(city_name):
+def get_weather_data_today(city_name):
     """Take city name and return weather data in json format"""
     location = get_location(city_name)
     lat = get_lat(location)
