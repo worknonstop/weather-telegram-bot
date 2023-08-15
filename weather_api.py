@@ -14,8 +14,10 @@ def get_location(city_name: str) -> Any:
     
 
 def get_lat(location):
+    """Get the location and return the latitude."""
     return f"{location.latitude: .2f}"
 
 
 def get_lon(location):
+    """Get the location and return the longitude."""
     return f"{location.longitude: .2f}"
