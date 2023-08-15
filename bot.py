@@ -15,7 +15,7 @@ dp = Dispatcher(bot, storage=storage)
 
 
 async def main():
-    """The function starts the bot and handlers"""
+    """Start the bot and handlers"""
     await dp.start_polling(bot)
 
 
