@@ -25,7 +25,7 @@ def get_lon(location):
     return f"{location.longitude: .2f}"
 
 
-def get_weather_data_today(city_name):
+def get_today_weather_json(city_name):
     """Take city name and return weather data in json format"""
     location = get_location(city_name)
     lat = get_lat(location)
@@ -33,5 +33,17 @@ def get_weather_data_today(city_name):
 
     weather_data = requests.get(
         f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&units=metric&lon={lon}&appid={API_KEY}&lang=ru"
+    )
+    return weather_data.json()
+
+
+def get_five_day_weather_json(city_name):
+    """Take city name and return json data of 5 day weather forecast"""
+    location = get_location(city_name)
+    lat = get_lat(location)
+    lon = get_lon(location)
+
+    weather_data = requests.get(
+        f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&&units=metric&appid={API_KEY}&lang=ru"
     )
     return weather_data.json()
