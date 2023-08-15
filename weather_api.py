@@ -12,3 +12,10 @@ def get_location(city_name: str) -> Any:
     geolocator = Nominatim(user_agent="weather_bot")
     return geolocator.geocode(city_name)
     
+
+def get_lat(location):
+    return f"{location.latitude: .2f}"
+
+
+def get_lon(location):
+    return f"{location.longitude: .2f}"
