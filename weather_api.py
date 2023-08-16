@@ -82,6 +82,7 @@ def get_current_weather_dict(city_name: str) -> Dict:
 
 
 def get_five_day_weather_list(city_name: str) -> List:
+    """Return a list of weather indicators for 5 days"""
     weather_json = get_five_day_weather_json(city_name)
     day_weather = weather_json["list"]
     twelve_hours = "12:00:00"
