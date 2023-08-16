@@ -1,10 +1,10 @@
 import os
 import requests
+from datetime import datetime
+from typing import Any, Dict, List
 
 from dotenv import load_dotenv
-from typing import Any, Dict
 from geopy.geocoders import Nominatim
-from datetime import datetime
 
 load_dotenv(".env")
 API_KEY = os.getenv("API_KEY")
@@ -12,7 +12,7 @@ API_KEY = os.getenv("API_KEY")
 
 def get_location(city_name: str) -> Any:
     """Take a city name and return city name and country"""
-    geolocator = Nominatim(user_agent="weather_bot")
+    geolocator = Nominatim(user_agent="weather-telegram-bot")
     return geolocator.geocode(city_name)
     
 
@@ -31,10 +31,11 @@ def get_today_weather_json(city_name):
     location = get_location(city_name)
     lat = get_lat(location)
     lon = get_lon(location)
-
+    ru = "ru"
     weather_data = requests.get(
-        f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&units=metric&lon={lon}&appid={API_KEY}&lang=ru"
+        f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&units=metric&lon={lon}&appid={API_KEY}&lang={ru}"
     )
+
     return weather_data.json()
 
 
@@ -43,9 +44,10 @@ def get_five_day_weather_json(city_name):
     location = get_location(city_name)
     lat = get_lat(location)
     lon = get_lon(location)
+    ru = "ru"
 
     weather_data = requests.get(
-        f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&&units=metric&appid={API_KEY}&lang=ru"
+        f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&appid={API_KEY}&lang={ru}"
     )
     return weather_data.json()
 
@@ -79,7 +81,7 @@ def get_current_weather_dict(city_name: str) -> Dict:
     return weather
 
 
-def get_five_day_weather_list(city_name: str) -> Dict:
+def get_five_day_weather_list(city_name: str) -> List:
     weather_json = get_five_day_weather_json(city_name)
     day_weather = weather_json["list"]
     twelve_hours = "12:00:00"
