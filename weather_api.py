@@ -50,7 +50,7 @@ def get_five_day_weather_json(city_name):
     return weather_data.json()
 
 
-def get_current_weather(city_name: str) -> Dict:
+def get_current_weather_dict(city_name: str) -> Dict:
     """Return a dictionary with weather indicators"""
     city_data = get_today_weather_json(city_name)
 
