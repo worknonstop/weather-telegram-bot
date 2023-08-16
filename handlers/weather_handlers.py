@@ -1,16 +1,32 @@
 import os
 import weather_api
 from keyboards.keyboard import get_keyboard
+from functools import wraps
 
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+ADMIN_IDS = os.getenv("ADMIN_IDS")
+
+def auth(func):
+    @wraps(func)
+    async def wrapped(message: types.Message, *args, **kwargs):
+        user_id = message.from_user.id
+        if str(user_id) not in ADMIN_IDS:
+            await message.answer("Нет доступа.")
+            return
+        return await func(message, *args, **kwargs)
+    return wrapped
 
 
 class Weather(StatesGroup):
     city_name = State()
 
 
+@auth
 async def get_day_weather(message: types.Message, state: FSMContext):
     """Return message to user with current weather"""
     keyboard = get_keyboard()
