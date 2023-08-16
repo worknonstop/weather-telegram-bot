@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
-from handlers.handlers import register_handlers
+from handlers.weather_handlers import register_handlers
 
 load_dotenv(".env")
 token = os.getenv("TOKEN")
