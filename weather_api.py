@@ -77,3 +77,23 @@ def get_current_weather_dict(city_name: str) -> Dict:
         "Продолжительность дня": f"{hours} часов",
     }
     return weather
+
+
+def get_five_day_weather_list(city_name: str) -> Dict:
+    weather_json = get_five_day_weather_json(city_name)
+    day_weather = weather_json["list"]
+    twelve_hours = "12:00:00"
+    
+    all = []
+    for day in day_weather:
+        if twelve_hours in day["dt_txt"]:
+            stage = {
+                "Дата:" f"{day['dt_txt']}",
+                "Температура:" f"{day['main']['temp']}",
+                "Тип погоды:" f"{day['weather'][0]['description']}",
+                "Влажность:" f"{day['main']['humidity']}",
+                "Скорость ветра:" f"{day['wind']['speed']}",
+                "Атмосферное давление:" f"{day['main']['pressure']}"
+            }
+            all.append(stage)
+    return all
