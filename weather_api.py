@@ -18,12 +18,12 @@ def get_location(city_name: str) -> Any:
 
 def get_lat(location):
     """Take the location and return the latitude."""
-    return f"{location.latitude: .2f}"
+    return f"{location.latitude:.2f}"
 
 
 def get_lon(location):
     """Take the location and return the longitude."""
-    return f"{location.longitude: .2f}"
+    return f"{location.longitude:.2f}"
 
 
 def get_today_weather_json(city_name):
@@ -32,10 +32,10 @@ def get_today_weather_json(city_name):
     lat = get_lat(location)
     lon = get_lon(location)
     ru = "ru"
+
     weather_data = requests.get(
         f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&units=metric&lon={lon}&appid={API_KEY}&lang={ru}"
     )
-
     return weather_data.json()
 
 
@@ -90,12 +90,12 @@ def get_five_day_weather_list(city_name: str) -> List:
     for day in day_weather:
         if twelve_hours in day["dt_txt"]:
             stage = {
-                "Дата:" f"{day['dt_txt']}",
-                "Температура:" f"{day['main']['temp']}",
-                "Тип погоды:" f"{day['weather'][0]['description']}",
-                "Влажность:" f"{day['main']['humidity']}",
-                "Скорость ветра:" f"{day['wind']['speed']}",
-                "Атмосферное давление:" f"{day['main']['pressure']}"
+                "Дата": f"{day['dt_txt']}",
+                "Температура": f"{day['main']['temp']}",
+                "Тип погоды": f"{day['weather'][0]['description']}",
+                "Влажность": f"{day['main']['humidity']}",
+                "Скорость ветра": f"{day['wind']['speed']}",
+                "Атмосферное давление": f"{day['main']['pressure']}"
             }
             all.append(stage)
     return all
