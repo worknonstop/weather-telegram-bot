@@ -6,6 +6,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from dotenv import load_dotenv
 
+from handlers.handlers import register_handlers
+
 load_dotenv(".env")
 token = os.getenv("TOKEN")
 
@@ -16,6 +18,7 @@ dp = Dispatcher(bot, storage=storage)
 
 async def main():
     """Start the bot and handlers"""
+    register_handlers(dp)
     await dp.start_polling(bot)
 
 
