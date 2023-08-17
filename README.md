@@ -1,20 +1,14 @@
 # Weather Telegram Bot
 This telegram bot shows the current weather and weather forecast for 5 days using OpenWeatherMap API
 
----
-
 ## Requirements
 - python = "^3.8"
 - poetry = "^1.3.2"
-
----
 
 ## Preparation
 
 To use the bot, you will need to register and get a free API key at openweathermap.org.
 The bot uses primitive access for the administrator by his telegram user id.
-
----
 
 ## Installation and Setup
 
