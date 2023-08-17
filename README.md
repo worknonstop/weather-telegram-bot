@@ -30,6 +30,6 @@ poetry install
 poetry run python bot.py
 ```
 
-5. **Usage:**
+5. **Usage:**  
 Write the name of the city or country to get the current weather.
 Along with the message, a button will appear to receive a 5-day weather forecast.
